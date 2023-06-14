@@ -1,4 +1,4 @@
-package again;
+package Algorithm.again;
 
 import java.io.*;
 import java.util.LinkedList;

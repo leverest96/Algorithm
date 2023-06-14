@@ -1,4 +1,4 @@
-package solved;
+package Algorithm.solved;
 
 import java.io.*;
 import java.util.LinkedList;
