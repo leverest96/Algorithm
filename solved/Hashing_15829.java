@@ -1,20 +1,26 @@
 package Algorithm.solved;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Hashing_15829 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int L = Integer.parseInt(br.readLine());
-        String S = br.readLine();
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
+        String line = br.readLine();
+
         long result = 0;
         long pow = 1;
-        for(int i = 0; i < L; i++) {
-            result += ((S.charAt(i) - 96) * pow);
+
+        for(int i = 0; i < N; i++) {
+            result += ((line.charAt(i) - 96) * pow);
             pow = (pow * 31) % 1234567891;
         }
-        System.out.println(result % 1234567891);
+
+        bw.write(String.valueOf(result % 1234567891));
+
+        bw.flush();
+        bw.close();
     }
 }
