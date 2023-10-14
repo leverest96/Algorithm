@@ -8,12 +8,12 @@ import java.util.StringTokenizer;
 
 public class 싸움_땅 {
     static class Player {
-        int number;
-        int power;
         int gun;
-        int d;
+        int number;
         int x;
         int y;
+        int d;
+        int power;
 
         public Player(int number, int x, int y, int d, int power) {
             this.number = number;
@@ -164,9 +164,9 @@ public class 싸움_땅 {
             } else {
                 if (vs.power + vs.gun < now.power + now.gun ||
                         (vs.power + vs.gun == now.power + now.gun && vs.power < now.power)) {
-                    score[now.number] += now.power + now.gun - vs.power - vs.gun;
+                    score[now.number] += (now.power + now.gun) - (vs.power + vs.gun);
 
-                    map[vs.x][vs.y] = now.number; // edit
+                    map[vs.x][vs.y] = now.number;
 
                     if (now.gun < vs.gun) {
                         if (now.gun != 0) {
@@ -184,7 +184,7 @@ public class 싸움_땅 {
 
                     for (int i = 0; i < 4; i++) {
                         int dr = vs.x + dirs[(vs.d + i) % 4][0];
-                        int dc = vs.x + dirs[(vs.d + i) % 4][1];
+                        int dc = vs.y + dirs[(vs.d + i) % 4][1];
 
                         if (dr < 0 || dc < 0 || dr >= N || dc >= N || map[dr][dc] != 0) {
                             continue;
@@ -217,7 +217,7 @@ public class 싸움_땅 {
 
                     players.offer(vs);
                 } else {
-                    score[vs.number] += vs.power + vs.gun - now.power - now.gun;
+                    score[vs.number] += (vs.power + vs.gun) - (now.power + now.gun);
 
                     if (now.gun > vs.gun) {
                         if (vs.gun != 0) {
@@ -237,7 +237,7 @@ public class 싸움_땅 {
 
                     for (int i = 0; i < 4; i++) {
                         int dr = now.x + dirs[(now.d + i) % 4][0];
-                        int dc = now.x + dirs[(now.d + i) % 4][1];
+                        int dc = now.y + dirs[(now.d + i) % 4][1];
 
                         if (dr < 0 || dc < 0 || dr >= N || dc >= N || map[dr][dc] != 0) {
                             continue;
