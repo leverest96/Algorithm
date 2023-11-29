@@ -6,9 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class 생태학_4358 {
-    public static int N, cnt;
-    public static int[] arr;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -18,7 +15,7 @@ public class 생태학_4358 {
         while (true) {
             String line = br.readLine();
 
-            if (line.isEmpty()) break;
+            if (line == null || line.isEmpty()) break;
 
             list.add(line);
         }
@@ -44,7 +41,7 @@ public class 생태학_4358 {
         }
 
         for (int i = 0; i < key.size(); i++) {
-            double portion = Math.round((double) value.get(i) / list.size() * 1000000) / 10000.0;
+            String portion = String.format("%.4f", (double) value.get(i) / list.size() * 100);
 
             bw.write(key.get(i) + " " + portion);
             bw.newLine();
