@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 public class 무기공학_18430 {
-    public static int N, M;
+    public static int N, M, max;
     public static int[][] arr;
     public static int[] dr = {-1, 0, 1, 0};
     public static int[] dc = {0, 1, 0, -1};
@@ -18,53 +18,48 @@ public class 무기공학_18430 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        if ((N == 1 && M == 2) || (N == 2 && M == 1) || (N == 1 && M == 1)) {
-            bw.write(String.valueOf(0));
-        } else {
-            arr = new int[N][M];
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
 
-            for (int i = 0; i < N; i++) {
-                st = new StringTokenizer(br.readLine());
-
-                for (int j = 0; j < M; j++) {
-                    arr[i][j] = Integer.parseInt(st.nextToken());
-                }
+            for (int j = 0; j < M; j++) {
+                arr[i][j] = Integer.parseInt(st.nextToken());
             }
+        }
 
-            int result = 0;
+        max = 0;
 
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < M; j++) {
-                    int max = 0;
-                    max += arr[i][j] * 2;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                boolean[][] visited = new boolean[N][M];
 
-                    int[] temp = new int[4];
-
-                    for (int k = 0; k < 4; k++) {
-                        int row = i + dr[i];
-                        int col = j + dc[i];
-
-                        if (row >= 0 && row < N && col >= 0 && col < M) {
-                            temp[k] = arr[row][col];
-                        }
-                    }
-
-                    for (int k = 0; k < 4; k++) {
-                        int end = k + 1 < 4 ? k + 1 : 0;
-
-                        if (temp[k] != 0 && temp[end] != 0) {
-                            max += temp[k] + temp[end];
-                            result = Math.max(max, result);
-                            max -= temp[k] + temp[end];
-                        }
-                    }
-                }
+                check(i, j, visited, max);
             }
-
-            bw.write(String.valueOf(result));
         }
 
         bw.flush();
         bw.close();
+    }
+
+    public static void check(int r, int c, boolean[][] visited, int max) {
+        if (visited[r][c]) return;
+
+        for (int i = 0; i < 4; i++) {
+            int rd1 = r + dr[i];
+            int cd1 = c + dc[i];
+
+            if (rd1 < 0 || rd1 > N || cd1 < 0 || cd1 > N) continue;
+
+            int ing = i + 1 > 3 ? 0 : i + 1;
+
+            int rd2 = r + dr[ing];
+            int cd2 = c + dc[ing];
+
+            if (rd2 < 0 || rd2 > N || cd2 < 0 || cd2 > N) continue;
+
+            visited[rd1][cd1] = true;
+            visited[rd2][cd2] = true;
+            visited[rd1][cd1] = false;
+            visited[rd2][cd2] = false;
+        }
     }
 }

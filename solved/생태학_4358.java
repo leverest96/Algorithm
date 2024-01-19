@@ -44,7 +44,7 @@ public class 생태학_4358 {
             String portion = String.format("%.4f", (double) value.get(i) / list.size() * 100);
 
             bw.write(key.get(i) + " " + portion);
-            
+
             bw.newLine();
         }
 
